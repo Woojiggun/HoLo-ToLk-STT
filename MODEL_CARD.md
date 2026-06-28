@@ -107,6 +107,12 @@ pip install hsl-embedding-zero zstandard numpy torch torchaudio
 python asr_lens.py --eval-only asr_lens_best_hslspec_gate.pt --data ./data/librispeech100
 ```
 
+## Acknowledgments
+
+Independent research, developed in collaboration with AI assistants — **Claude Code** (Anthropic)
+and **Codex**. The HSL work and experimental direction are the author's; the tools assisted with
+engineering and review.
+
 ## Citation
 
 ```bibtex

@@ -200,6 +200,13 @@ unified models are **separate sibling releases**, coming as they firm up:
 
 Released honestly as the line develops — a possibility-proof, not a finished product.
 
+## Acknowledgments
+
+This is independent research — and, like most research today, it was done **with AI assistants**.
+Developed in collaboration with **Claude Code** (Anthropic) and **Codex**: the HSL substrate, the
+spectral-lens approach, and the experimental direction are the author's; the AI tools helped with
+engineering, packaging, and review.
+
 ## License & citation
 
 **MIT License — © 2026 Jinhyun Woo (ggunio5782@gmail.com).**
