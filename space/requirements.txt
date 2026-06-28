@@ -1,8 +1,7 @@
-gradio>=4.0
 torch
 torchaudio
 numpy
 zstandard
-huggingface_hub<0.26   # gradio 4.44 oauth imports HfFolder, which newer huggingface_hub removed
+huggingface_hub
 hsl-embedding-zero
-audioop-lts; python_version >= "3.13"   # Py3.13 removed stdlib audioop (PEP 594); pydub (a gradio dep) needs it
+audioop-lts; python_version >= "3.13"   # Py3.13 removed stdlib audioop (PEP 594); some audio deps still import it
