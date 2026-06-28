@@ -1,5 +1,6 @@
 ---
 title: HoLo-ToLk (STT)
+short_description: "Tokenizer-free speech-to-text - HSL substrate + spectral lens"
 emoji: 🎙️
 colorFrom: indigo
 colorTo: blue
