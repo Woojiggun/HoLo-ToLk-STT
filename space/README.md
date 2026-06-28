@@ -7,7 +7,7 @@ sdk: gradio
 sdk_version: 4.44.0
 app_file: app.py
 pinned: false
-license: mit
+license: cc-by-nc-4.0
 ---
 
 # HoLo-ToLk (STT) — speech-to-text (rough feasibility demo)
@@ -39,4 +39,4 @@ The checkpoint is pulled from the HF model repo `ggunio/HoLo-ToLk-STT` at startu
 (`asr_lens_best_hslspec_gate.pt`, ~200 MB). Set the `HOLOTOLK_CKPT` env var to a local `.pt` path
 to use your own.
 
-MIT © 2026 Jinhyun Woo.
+CC BY-NC 4.0 (non-commercial) © 2026 Jinhyun Woo. The HSL substrate is separately MIT.

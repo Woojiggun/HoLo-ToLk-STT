@@ -1,5 +1,5 @@
 ---
-license: mit
+license: cc-by-nc-4.0
 language:
   - en
 library_name: pytorch
@@ -27,7 +27,7 @@ spectral lens** (log-mel + a learnable gated fusion over the lossless HSL substr
 plain character-CTC ASR baseline, transcribes speech — **and that the lens is what makes it work.**
 
 - **Code / reproduce:** https://github.com/Woojiggun/HoLo-ToLk-STT
-- **Author:** Jinhyun Woo (ggunio5782@gmail.com) · **License:** MIT
+- **Author:** Jinhyun Woo (ggunio5782@gmail.com) · **License:** CC BY-NC 4.0 (non-commercial; the HSL substrate is separately MIT)
 
 ## The honest claim
 

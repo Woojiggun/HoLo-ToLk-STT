@@ -1,6 +1,6 @@
 # HoLo-ToLk (STT) — an HSL-lens speech-to-text feasibility model
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](LICENSE)
 [![Software DOI](https://zenodo.org/badge/1283130161.svg)](https://doi.org/10.5281/zenodo.21004333)
 
 > 🇰🇷 이 프로젝트는 개인 시간에 독립적으로 연구·공개한 오픈 연구 산출물입니다.
@@ -209,9 +209,12 @@ engineering, packaging, and review.
 
 ## License & citation
 
-**MIT License — © 2026 Jinhyun Woo (ggunio5782@gmail.com).**
-Free to use, modify, and **distribute, including commercially** — the only condition is keeping the
-copyright notice and attribution to **Jinhyun Woo**. See [LICENSE](LICENSE).
+**License: [CC BY-NC 4.0](LICENSE) — © 2026 Jinhyun Woo (ggunio5782@gmail.com).**
+Free to **share and adapt for non-commercial purposes**, with attribution to **Jinhyun Woo**.
+**Commercial use is not permitted** (contact the author for commercial licensing). See [LICENSE](LICENSE).
+The underlying **HSL substrate** ([`hsl-embedding`](https://github.com/Woojiggun/hsl-embedding)) is
+licensed **separately under MIT** and stays free for any use, including commercial — only *this model*
+is non-commercial.
 
 ```bibtex
 @software{woo_holotolk_stt_2026,

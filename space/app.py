@@ -115,7 +115,7 @@ with gr.Blocks(title="HoLo-ToLk (STT)") as demo:
     btn.click(transcribe, inputs=inp, outputs=out)
     gr.Markdown(
         "_Model: `hslspec` + gated fusion, seed 0 (CER 0.194 on LibriSpeech dev-clean, English). "
-        "Rough feasibility demo. MIT © 2026 Jinhyun Woo._"
+        "Rough feasibility demo. CC BY-NC 4.0 (non-commercial) © 2026 Jinhyun Woo._"
     )
 
 if __name__ == "__main__":

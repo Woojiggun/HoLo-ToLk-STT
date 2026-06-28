@@ -8,7 +8,7 @@ authors:
     email: ggunio5782@gmail.com
 version: 0.1.0
 date-released: 2026-06-29
-license: MIT
+license: CC-BY-NC-4.0
 repository-code: "https://github.com/Woojiggun/HoLo-ToLk-STT"
 url: "https://huggingface.co/ggunio/HoLo-ToLk-STT"
 keywords:
