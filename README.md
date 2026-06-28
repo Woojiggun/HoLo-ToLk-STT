@@ -169,10 +169,13 @@ checkpoint stores its own `config` and `vocab`, so `asr_lens.py` rebuilds the ex
 
 ## Try it
 
-A minimal Hugging Face **Gradio Space** lives in [`space/`](space/): **record your own voice or
-upload audio** → resample to 8 kHz mu-law → load the frozen checkpoint → char-CTC greedy decode →
-transcript. **English only.** It carries an honest banner that the output is a **rough feasibility
-demo** (8 kHz, no LM) — a clear, slowly-spoken English sentence gives the most legible output.
+**▶ Live demo: https://huggingface.co/spaces/ggunio/HoLo-ToLk** — the combined **HoLo-ToLk** Space
+hosts this **STT** model and its **TTS** sibling as two tabs (the two are intended to be **unified into
+a single model** over time). Open the **Speech → Text (STT)** tab: **record your own voice or upload
+audio** → 8 kHz mu-law → frozen checkpoint → char-CTC greedy decode → transcript (+ CER vs an optional
+reference). **English only**, an honest **rough feasibility demo** (8 kHz, no LM) — a clear,
+slowly-spoken English sentence gives the most legible output. The Space code also lives in
+[`space/`](space/) for reference.
 
 ## Scope (honest)
 
