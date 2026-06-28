@@ -1,7 +1,8 @@
 """HoLo-ToLk (STT) - Gradio Space (rough feasibility STT demo).
 
 Record your own voice OR upload audio -> resample to 8 kHz mu-law -> load the frozen `asr_lens`
-checkpoint (hslspec + gated fusion, seed 0) -> char-CTC greedy decode -> transcript.
+checkpoint (hslspec + gated fusion, seed 0) -> char-CTC greedy decode -> transcript (+ CER vs a
+reference, when one is provided).
 
 HONEST CAVEAT: this is a feasibility / works demonstration. ENGLISH ONLY (trained on LibriSpeech
 English read speech). The output is readable but ROUGH/garbled in absolute terms (8 kHz, no language
@@ -73,10 +74,27 @@ def _mulaw_encode(x, mu=255):
     return np.clip((y + 1.0) / 2.0 * mu + 0.5, 0, mu).astype(np.uint8)
 
 
+def _norm(s: str) -> str:
+    return " ".join(str(s).lower().split())
+
+
+def _cer(hyp: str, ref: str):
+    """char-level CER = edit_distance(hyp, ref) / len(ref), on lightly normalized text."""
+    h, r = _norm(hyp), _norm(ref)
+    if not r:
+        return None
+    dp = list(range(len(r) + 1))                         # 1-row Levenshtein
+    for ch in h:
+        prev, dp[0] = dp[0], dp[0] + 1
+        for j, cr in enumerate(r, 1):
+            prev, dp[j] = dp[j], min(dp[j] + 1, dp[j - 1] + 1, prev + (ch != cr))
+    return dp[len(r)] / len(r)
+
+
 @torch.no_grad()
-def transcribe(audio):
+def transcribe(audio, reference=""):
     if audio is None:
-        return "(no audio) — upload a file or record a clip."
+        return "(no audio) - record, upload, or click an Example below."
     sr, wav = audio                                      # gradio Audio(type="numpy") -> (sample_rate, np.ndarray)
     ulaw = _to_mulaw_bytes(wav, sr)
     if ulaw.size == 0:
@@ -84,8 +102,17 @@ def transcribe(audio):
     model = _load_model()
     ids = torch.tensor(ulaw.astype(np.int64), dtype=torch.long, device=_DEVICE).unsqueeze(0)
     logp, in_len = model(ids, [int(ulaw.size)])
-    hyp = A.greedy_decode(logp, in_len)[0]
-    return hyp if hyp.strip() else "(silence / nothing decoded)"
+    hyp = (A.greedy_decode(logp, in_len)[0] or "").strip()
+    out = hyp if hyp else "(silence / nothing decoded)"
+    ref = (reference or "").strip()
+    if ref and hyp:
+        cer = _cer(hyp, ref)
+        if cer is not None:
+            acc = max(0.0, 1.0 - cer)
+            out += (f"\n\n--- vs reference ---\n"
+                    f"CER {cer:.3f}   ({acc * 100:.0f}% characters correct)\n"
+                    f"reference: {ref}")
+    return out
 
 
 BANNER = """
@@ -116,22 +143,29 @@ with gr.Blocks(title="HoLo-ToLk (STT)") as demo:
         inp = gr.Audio(
             sources=["microphone", "upload"],            # record your own voice OR upload a file
             type="numpy",
-            label="English speech — record your voice or upload (any rate; resampled to 8 kHz)",
+            label="English speech - record your voice or upload (any rate; resampled to 8 kHz)",
         )
+    ref = gr.Textbox(
+        label="Reference transcript (optional) - examples fill this automatically; type what you said to score your own clip",
+        placeholder="leave empty for your own recording, or paste the words you spoke to get a character-accuracy score",
+        lines=2,
+    )
     gr.Examples(
-        examples=[["examples/sample1.wav"], ["examples/sample2.wav"], ["examples/sample3.wav"]],
-        inputs=inp,
-        label="In-domain LibriSpeech examples (the audio this model was trained on) - click one, then Transcribe",
+        examples=[
+            ["examples/sample1.wav", "he was in a fevered state of mind owing to the blight his wife's action threatened to cast upon his entire future"],
+            ["examples/sample2.wav", "he would have to pay her the money which she would now regularly demand or there would be trouble it did not matter what he did"],
+            ["examples/sample3.wav", "hurstwood walked the floor mentally arranging the chief points of his situation"],
+        ],
+        inputs=[inp, ref],
+        label="In-domain LibriSpeech examples - click one (loads the audio AND its reference), then press Transcribe",
     )
     btn = gr.Button("Transcribe", variant="primary")
-    out = gr.Textbox(label="Transcript (English, greedy char-CTC, no LM — expect rough output)", lines=4)
-    btn.click(transcribe, inputs=inp, outputs=out)
+    out = gr.Textbox(label="Transcript + accuracy (English, char-CTC, no LM - rough by design)", lines=6)
+    btn.click(transcribe, inputs=[inp, ref], outputs=out)
     gr.Markdown(
-        "**Example reference transcripts** (the model's output should be *readable-but-rough*, not perfect "
-        "— and a casual mic clip will be far worse than these):\n\n"
-        "1. _he was in a fevered state of mind owing to the blight his wife's action threatened to cast upon his entire future_\n"
-        "2. _he would have to pay her the money which she would now regularly demand or there would be trouble it did not matter what he did_\n"
-        "3. _hurstwood walked the floor mentally arranging the chief points of his situation_"
+        "_When a reference is present (an example, or your own typed text), the output shows **CER** and "
+        "**% characters correct** vs that reference. On these in-domain clips expect roughly **0.15-0.25 CER** "
+        "(readable-but-rough); a casual single-word mic clip will be far worse - that is expected, by design._"
     )
     gr.Markdown(
         "_Model: `hslspec` + gated fusion, seed 0 (CER 0.194 on LibriSpeech dev-clean, English). "
