@@ -5,3 +5,4 @@ numpy
 zstandard
 huggingface_hub
 hsl-embedding-zero
+audioop-lts; python_version >= "3.13"   # Py3.13 removed stdlib audioop (PEP 594); pydub (a gradio dep) needs it
