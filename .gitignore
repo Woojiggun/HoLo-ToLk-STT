@@ -1,0 +1,38 @@
+# data (rebuilt locally via collect_libri.py; LibriSpeech is not redistributed here)
+data/
+*.jsonl.zst
+
+# model checkpoints (hosted on the Hugging Face model repo, not in git)
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# notebooks / editors
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+
+# audio scratch / outputs
+*.wav
+*.flac
+*.mp3
+out_*/
+synth/
+samples/
+
+# misc large / local
+*.log
+*.tmp

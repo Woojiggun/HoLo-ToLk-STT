@@ -1,0 +1,7 @@
+gradio>=4.0
+torch
+torchaudio
+numpy
+zstandard
+huggingface_hub
+hsl-embedding-zero

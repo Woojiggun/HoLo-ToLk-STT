@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use HoLo-ToLk (STT), please cite it as below."
+type: software
+title: "HoLo-ToLk (STT): an HSL-lens speech-to-text feasibility model"
+authors:
+  - family-names: Woo
+    given-names: Jinhyun
+    email: ggunio5782@gmail.com
+version: 0.1.0
+date-released: 2026-06-29
+license: MIT
+repository-code: "https://github.com/Woojiggun/HoLo-ToLk-STT"
+url: "https://huggingface.co/ggunio/HoLo-ToLk-STT"
+keywords:
+  - speech-to-text
+  - asr
+  - byte-native
+  - tokenizer-free
+  - hsl
+  - spectral-lens
+  - ctc
+  - pytorch
+# DOI: TODO -- minted by Zenodo after the GitHub repo is connected and the first release is cut.
+# Add it here and in README once available (concept DOI for "all versions").
+# identifiers:
+#   - type: doi
+#     value: 10.5281/zenodo.XXXXXXX
+#     description: "Software concept DOI (all versions -- cite this for the code)"
