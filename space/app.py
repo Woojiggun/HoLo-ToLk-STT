@@ -91,12 +91,20 @@ def transcribe(audio):
 BANNER = """
 # HoLo-ToLk (STT) — speech-to-text (rough feasibility demo)
 
-> ⚠️ **Rough feasibility demo — NOT a usable transcriber. English only** (LibriSpeech read speech).
-> Expect **garbled output**: it runs at **8 kHz** (downsampled, high frequencies lost), **no language
-> model**, **character-level CTC** (no spell/word correction), trained on ~100h on a **single GPU**.
-> The point is the controlled result — an HSL substrate **+ spectral lens** beats a mel baseline
-> *in the same setup* (CER **0.194** vs **0.213**, multi-seed) — **not** the transcript itself.
-> A **clear, slowly-spoken English sentence** gives the most legible output.
+> ⚠️ **Please read before testing — this sets your expectations.**
+> A **feasibility / works demonstration, NOT a usable transcriber.** The model was trained on **clean,
+> read-aloud English sentences** (LibriSpeech audiobooks) at **8 kHz**, with **no language model** and a
+> character-level CTC head.
+>
+> **A single word or casual speech — e.g. saying "hello" into a laptop mic — is _out-of-distribution_ and
+> looks much worse than the headline number.** Short, spontaneous, room-mic audio is the hardest case for it.
+>
+> **For representative output:** click an **Example** below (real LibriSpeech clips — the kind of audio it
+> was trained on), or **read a full English sentence aloud, clearly and slowly** (like narrating a book).
+> Even then it stays **readable-but-rough by design.**
+>
+> **What matters is the controlled comparison** — HSL substrate **+ spectral lens beats the mel baseline in
+> the same setup, multi-seed (CER 0.194 vs 0.213)** — **not the transcript itself.**
 
 Substrate: [`hsl-embedding-zero`](https://github.com/Woojiggun/hsl-embedding-zero) (zero-parameter byte encoder).
 Details + code: **https://github.com/Woojiggun/HoLo-ToLk-STT**
@@ -110,9 +118,21 @@ with gr.Blocks(title="HoLo-ToLk (STT)") as demo:
             type="numpy",
             label="English speech — record your voice or upload (any rate; resampled to 8 kHz)",
         )
+    gr.Examples(
+        examples=[["examples/sample1.wav"], ["examples/sample2.wav"], ["examples/sample3.wav"]],
+        inputs=inp,
+        label="In-domain LibriSpeech examples (the audio this model was trained on) - click one, then Transcribe",
+    )
     btn = gr.Button("Transcribe", variant="primary")
     out = gr.Textbox(label="Transcript (English, greedy char-CTC, no LM — expect rough output)", lines=4)
     btn.click(transcribe, inputs=inp, outputs=out)
+    gr.Markdown(
+        "**Example reference transcripts** (the model's output should be *readable-but-rough*, not perfect "
+        "— and a casual mic clip will be far worse than these):\n\n"
+        "1. _he was in a fevered state of mind owing to the blight his wife's action threatened to cast upon his entire future_\n"
+        "2. _he would have to pay her the money which she would now regularly demand or there would be trouble it did not matter what he did_\n"
+        "3. _hurstwood walked the floor mentally arranging the chief points of his situation_"
+    )
     gr.Markdown(
         "_Model: `hslspec` + gated fusion, seed 0 (CER 0.194 on LibriSpeech dev-clean, English). "
         "Rough feasibility demo. CC BY-NC 4.0 (non-commercial) © 2026 Jinhyun Woo._"
