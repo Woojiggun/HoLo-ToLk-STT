@@ -20,9 +20,11 @@ keywords:
   - spectral-lens
   - ctc
   - pytorch
-# DOI: TODO -- minted by Zenodo after the GitHub repo is connected and the first release is cut.
-# Add it here and in README once available (concept DOI for "all versions").
-# identifiers:
-#   - type: doi
-#     value: 10.5281/zenodo.XXXXXXX
-#     description: "Software concept DOI (all versions -- cite this for the code)"
+doi: 10.5281/zenodo.21004333
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21004333
+    description: "Software concept DOI (all versions -- cite this for the code)"
+  - type: doi
+    value: 10.5281/zenodo.21004334
+    description: "Version DOI (v0.1.0)"

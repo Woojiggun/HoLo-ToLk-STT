@@ -114,6 +114,7 @@ python asr_lens.py --eval-only asr_lens_best_hslspec_gate.pt --data ./data/libri
   author = {Jinhyun Woo},
   title  = {HoLo-ToLk (STT): an HSL-lens speech-to-text feasibility model},
   year   = {2026},
+  doi    = {10.5281/zenodo.21004333},
   url    = {https://github.com/Woojiggun/HoLo-ToLk-STT}
 }
 ```

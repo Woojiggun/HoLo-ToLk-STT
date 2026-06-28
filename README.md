@@ -1,10 +1,7 @@
 # HoLo-ToLk (STT) — an HSL-lens speech-to-text feasibility model
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-<!-- DOI badge: TODO. After you connect this repo to Zenodo and cut the first GitHub release,
-     Zenodo mints a DOI. Paste the badge here, e.g.:
-     [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
-     and fill the same DOI into CITATION.cff and the BibTeX block below. Do NOT invent a number. -->
+[![Software DOI](https://zenodo.org/badge/1283130161.svg)](https://doi.org/10.5281/zenodo.21004333)
 
 > 🇰🇷 이 프로젝트는 개인 시간에 독립적으로 연구·공개한 오픈 연구 산출물입니다.
 > 🇬🇧 This is an independent, open research project — researched and released on personal time.
@@ -214,7 +211,7 @@ copyright notice and attribution to **Jinhyun Woo**. See [LICENSE](LICENSE).
   author = {Jinhyun Woo},
   title  = {HoLo-ToLk (STT): an HSL-lens speech-to-text feasibility model},
   year   = {2026},
+  doi    = {10.5281/zenodo.21004333},
   url    = {https://github.com/Woojiggun/HoLo-ToLk-STT}
-  % doi  = {10.5281/zenodo.XXXXXXX}   % TODO: add after the first Zenodo release
 }
 ```
